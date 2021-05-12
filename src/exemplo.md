@@ -111,10 +111,10 @@ void shell_sort(int v[], int n) {
     }
 }
 ```
-:::
-???
 
 Vale ressaltar, que utilizamos para esse exemplo utilizamos um tipo de gap, dividimos o gap sempre na metade, mas como citamos anteriormente, existem vários tipos de gaps para ordenações de vetores, sendo uma sequência de gaps mais adequada para cada vetor a ser ordenado.
+:::
+???
 
 Complexidade
 ---------
