@@ -32,8 +32,8 @@ Simulando o vetor acima com Gap = 3 , temos os 3 subvetores imaginários abaixo:
 Simulando o vetor acima com Gap = 2 , temos os 2 subvetores imaginários abaixo:
 
 ```c
-     {4,2,1}
-     {5,3}
+     {4 ,2, 1}
+     {5, 3}
 ```
 
 Vamos praticar um pouco com a atividade abaixo:
@@ -54,6 +54,13 @@ Teriamos 3 Subvetores imaginarios, cada um deles com 2 termos:
     {5, 6}
 ```
 De forma resumida, na primeira iteração é definido um valor de gap e o algoritmo faz essa divisão de subvetores imaginários de acordo com o valor, e os ordena de forma muito semelhante ao insertion sort. Desse modo, na próxima iteração, um novo valor de gap é definido e o processo se repete, até o gap chegar a 1, nesta etapa é feito um insertion sort tradicional, tendo um assim um vetor ordenado como produto final.
+:::
+
+???
+
+
+Implementação
+---------
 
 Mas como são definidos os valores dos **gaps** ?
 
@@ -63,13 +70,7 @@ Mas então por que existem diversas listas e não só uma?
 
 Isso se deve ao fato de que não foi descoberto uma sequência de **gaps** que seja a melhor em todas as situações, cada uma das sequências pode servir muito bem para um caso específico e muito mal para outro. O que faz com que este algoritmo não tenha uma complexidade geral, e sim uma complexidade para cada sequência de **gaps**.
 
-:::
-
-???
-
-
-Implementação
----------
+Dessa forma, utilizando uma implementação do código do shell sort com um tipo de gap talvez deixe mais claro 
 
 ```txt
 para todo gap maior que 0, divida o gap ao meio
@@ -112,6 +113,11 @@ void shell_sort(int v[], int n) {
 ```
 :::
 ???
+
+Vale ressaltar, que utilizamos para esse exemplo utilizamos um tipo de gap, dividimos o gap sempre na metade, mas como citamos anteriormente, existem vários tipos de gaps para ordenações de vetores, sendo uma sequência de gaps mais adequada para cada vetor a ser ordenado.
+
+Complexidade
+---------
 
 Hashi
 ---------
