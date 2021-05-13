@@ -1,6 +1,10 @@
 Shell Sort
 ======
 
+**Alunos:** Antonio Fuziy e André Tavernaro
+
+---
+
 Primeira ideia
 ---------
 
@@ -116,8 +120,81 @@ Vale ressaltar, que utilizamos para esse exemplo utilizamos um tipo de gap, divi
 :::
 ???
 
-Complexidade
----------
+;diagrama
+
+---
+
+Textola aqui
+
+![](ex-shell.png)
+
+??? Atividade
+::: Gabarito
+![](gabarito-ex-shell.png)
+:::
+???
+---
+## Complexidade
+
+**Sequência original de Shell**
+
+$$\frac{n}{2^k}$$
+
+sendo
+
+$$k = {1, 2, 3, 4, 5 ...}$$
+
+a sequencia fica
+
+$$\frac{n}{2} + \frac{n}{4} + \frac{n}{8} + \frac{n}{16}... + {1}$$
+
+e a complexidade
+
+$${O(n^2)}$$
+
+---
+
+**Sequência de Knuth**
+
+$$\frac{3^k - 1}{2}$$
+
+sendo
+
+$$k = {1, 2, 3, 4, 5 ...}$$
+
+a sequencia fica
+
+$$ 1 + 4 + 13 + 40...+ \frac{3^k - 1}{2}$$
+
+e a complexidade
+
+$${O(n^\frac{3}{2})}$$
+
+---
+
+**Sequência de Hibbard**
+
+$${2^k - 1}$$
+
+sendo
+
+$$k = {1, 2, 3, 4, 5 ...}$$
+
+a sequencia fica
+
+$$ 1 + 3 + 7 + 15...+ 2^k - 1$$
+
+e a complexidade
+
+$${O(n^\frac{3}{2})}$$
+
+---
+
+??? Curiosidades
+::: .
+![](graphics.png)
+:::
+???
 
 Hashi
 ---------
