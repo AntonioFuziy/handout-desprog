@@ -19,26 +19,33 @@ Bem, o Shell Sort primeiramente tem uma implementação simples e requer pouco c
 Gaps
 ---------
 
-O termo "**Gap**" significa "Vão", e é exatamente isso que acontece no nosso vetor. De forma resumida, para cada iteração do código, é definido um valor para "**gap**", desse modo, são organizados subvetores imaginários que são os termos do vetor original itercalados por esse valor definido. Talvez fique mais claro com o exemplo abaixo:
+O termo "**gap**" significa "Vão", e é exatamente isso que acontece no nosso vetor. De forma resumida, para cada iteração do código, é definido um valor para "**gap**", desse modo, são organizados subvetores imaginários que são os termos do vetor original itercalados por esse valor definido. Talvez fique mais claro com o exemplo abaixo:
 
 
 ```c
-    {4, 5, 2, 3, 1}
+    {4, 2, 8, 5, 9, 3}
 ```
+
+![](exemplos-gap/exemplo-gap-enunciado.png)
+
 Simulando o vetor acima com Gap = 3 , temos os 3 subvetores imaginários abaixo:
 
 ```c
-     {4, 3}
-     {5, 1}
-     {2}
+     {4, 5}
+     {2, 9}
+     {8, 3}
 ```
 
-Simulando o vetor acima com Gap = 2 , temos os 2 subvetores imaginários abaixo:
+![](exemplos-gap/exemplo-gap3.png)
+
+Simulando o vetor inicial com Gap = 2 , temos os 2 subvetores imaginários abaixo:
 
 ```c
-     {4 ,2, 1}
-     {5, 3}
+     {4, 8, 9}
+     {2, 5, 3}
 ```
+
+![](exemplos-gap/exemplo-gap2.png)
 
 Vamos praticar um pouco com a atividade abaixo:
 
@@ -47,17 +54,20 @@ Vamos praticar um pouco com a atividade abaixo:
 Tendo o vetor abaixo, pense como seriam os subvetores para um Gap = 3.
 
 ```c
-    {2, 8, 5, 4, 1, 6}
+    {9, 5, 2, 1, 8, 4}
 ```
+
+![](exemplos-gap/exercicio-gap-enunciado.png)
 
 ::: Gabarito
 Teriamos 3 Subvetores imaginarios, cada um deles com 2 termos:
 ```c
+    {9, 1}
+    {5, 8}
     {2, 4}
-    {8, 1}
-    {5, 6}
 ```
-De forma resumida, na primeira iteração é definido um valor de gap e o algoritmo faz essa divisão de subvetores imaginários de acordo com o valor, e os ordena de forma muito semelhante ao insertion sort. Desse modo, na próxima iteração, um novo valor de gap é definido e o processo se repete, até o gap chegar a 1, nesta etapa é feito um insertion sort tradicional, tendo um assim um vetor ordenado como produto final.
+
+![](exemplos-gap/exercicio-gap-gabarito.png)
 :::
 
 ???
@@ -65,6 +75,8 @@ De forma resumida, na primeira iteração é definido um valor de gap e o algori
 
 Implementação
 ---------
+
+De forma resumida, na primeira iteração é definido um valor de gap e o algoritmo faz essa divisão de subvetores imaginários de acordo com o valor, e os ordena de forma muito semelhante ao insertion sort. Desse modo, na próxima iteração, um novo valor de gap é definido e o processo se repete, até o gap chegar a 1, nesta etapa é feito um insertion sort tradicional, tendo um assim um vetor ordenado como produto final.
 
 Mas como são definidos os valores dos **gaps** ?
 
@@ -119,155 +131,115 @@ void shell_sort(int v[], int n) {
 Vale ressaltar, que utilizamos para esse exemplo utilizamos um tipo de gap, dividimos o gap sempre na metade, mas como citamos anteriormente, existem vários tipos de gaps para ordenações de vetores, sendo uma sequência de gaps mais adequada para cada vetor a ser ordenado.
 :::
 ???
+??? Exemplo
+
+Abaixo temos um exemplo do shell sort em prática, a sequência de gaps utilizada é de [4,3,2,1]
 
 ;diagrama
 
+
+!!! Aviso
+Vale lembrar que no exemplo, os subvetores são ordenados de uma vez, no entanto isso não acontece na realidade, a ordenação desses subvetores imaginários é feita de modo semelhante ao insertion sort, ou seja, os números são movidos um de cada vez e não de uma vez só!
+!!!
+???
 ---
 
-Textola aqui
+??? Atividade
+
+Tendo o vetor abaixo, pense em como ele ficaria antes de ir para o próximo gap, ou seja, no final de cada iteração. **A sequência de gaps utilizadas ainda é a mesma do exemplo anterior.** 
 
 ![](ex-shell.png)
 
-??? Atividade
 ::: Gabarito
 ![](gabarito-ex-shell.png)
 :::
 ???
----
 ## Complexidade
+
+Vamos agora dar uma olhada em como funciona a complexidade do shell sort. Bom, basicamente o shell sort não apresenta uma complexidade fixa, uma vez que a sua complexidade varia conforme a sequência escolhida para os **gaps**, se você voltar para o exemplo do algoritmo do shell sort implementado em C, é possível notar que a sequência de gaps é n/2 
+
+a complexidade eh quadratica baseada no tamanho do vetor
 
 **Sequência original de Shell**
 
+- Sequência de gaps escolhida:
+
 $$\frac{n}{2^k}$$
 
-sendo
+- Para todo valor de k:
 
 $$k = {1, 2, 3, 4, 5 ...}$$
 
-a sequencia fica
+- Substituindo os valores de k na sequência de gaps, ficamos com:
 
-$$\frac{n}{2} + \frac{n}{4} + \frac{n}{8} + \frac{n}{16}... + {1}$$
+$$\frac{n}{2} + \frac{n}{4} + \frac{n}{8} + \frac{n}{16}...$$
 
-e a complexidade
+- Mas, lembre-se, como todo subvetor imaginário do shell sort é ordenado pelo **insertion sort**, e a complexidade de todo o insertion sort é quadrática (
+$O(n^2)$), o que ocorre é que a sequência de gaps somada, dependerá dessa ordenação. Assim, a soma de todos os gaps fica:
+
+$$\frac{n^2}{2} + \frac{n^2}{4} + \frac{n^2}{8} + \frac{n^2}{16}...$$
+
+- Deixando o $n^2$ em evidência, temos que:
+
+$$n^2 + (\frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{16}...)$$
+
+- Abrindo-se a sequência em uma PG de razão $\frac{1}{2}$, primeiro termo igual a $\frac{1}{2}$, temos que a soma da PG fica:
+
+$$n^2 + (\frac{\frac{1}{2}}{1 - \frac{1}{2}})$$
+
+- Resolvendo-se a soma de PG tem-se então que:
+
+$$n^2 + 1$$
+
+- Por fim, como temos a sequência dependente apenas de $n^2$, podemos concluir que a complexidade da sequência original de Shell Sort é:
 
 $${O(n^2)}$$
+
+**Abaixo temos algumas outras sequências de gaps e suas devidas complexidades, apenas como curiosidade:**
 
 ---
 
 **Sequência de Knuth**
 
+- Sequência de gaps escolhida:
+
 $$\frac{3^k - 1}{2}$$
 
-sendo
+- Para todo valor de k:
 
 $$k = {1, 2, 3, 4, 5 ...}$$
 
-a sequencia fica
+- Substituindo os valores de k na sequência de gaps, ficamos com:
 
 $$ 1 + 4 + 13 + 40...+ \frac{3^k - 1}{2}$$
 
-e a complexidade
+- Por fim a complexidade acaba em:
 
 $${O(n^\frac{3}{2})}$$
 
 ---
 
-**Sequência de Hibbard**
+**Sequência de Pratt**
 
-$${2^k - 1}$$
+- Sequência de gaps escolhida:
 
-sendo
+$${2^p . 2^q}$$
+
+- Para todo valor de k:
 
 $$k = {1, 2, 3, 4, 5 ...}$$
 
-a sequencia fica
+- Substituindo os valores de k na sequência de gaps, ficamos com:
 
 $$ 1 + 3 + 7 + 15...+ 2^k - 1$$
 
-e a complexidade
+- Por fim a complexidade acaba em:
 
 $${O(n^\frac{3}{2})}$$
 
----
-
+<!-- 
 ??? Curiosidades
 ::: .
 ![](graphics.png)
 :::
-???
-
-Hashi
----------
-
-Para criar um parágrafo, basta escrever um texto contínuo, sem pular linhas.
-
-Você também pode criar
-
-1. listas;
-
-2. ordenadas,
-
-assim como
-
-* listas;
-
-* não-ordenadas
-
-e imagens. Lembre que todas as imagens devem estar em uma subpasta *img*.
-
-![](logo.png)
-
-Para tabelas, usa-se a [notação do
-MultiMarkdown](https://fletcher.github.io/MultiMarkdown-6/syntax/tables.html),
-que é muito flexível. Vale a pena abrir esse link para saber todas as
-possibilidades.
-
-| coluna a | coluna b |
-|----------|----------|
-| 1        | 2        |
-
-Ao longo de um texto, você pode usar *itálico*, **negrito**, {red}(vermelho) e
-[[tecla]]. Também pode usar uma equação LaTeX: $f(n) \leq g(n)$. Se for muito
-grande, você pode isolá-la em um parágrafo.
-
-$$\lim_{n \rightarrow \infty} \frac{f(n)}{g(n)} \leq 1$$
-
-Para inserir uma animação, use `md ;` seguido do nome de uma pasta onde as
-imagens estão. Essa pasta também deve estar em *img*.
-
-;bubble
-
-Você também pode inserir código, inclusive especificando a linguagem.
-
-``` py
-def f():
-    print('hello world')
-```
-
-``` c
-void f() {
-    printf("hello world\n");
-}
-```
-
-Se não especificar nenhuma, o código fica com colorização de terminal.
-
-```
-hello world
-```
-
-
-!!! Aviso
-Este é um exemplo de aviso, entre `md !!!`.
-!!!
-
-
-??? Exercício
-
-Este é um exemplo de exercício, entre `md ???`.
-
-::: Gabarito
-Este é um exemplo de gabarito, entre `md :::`.
-:::
-
-???
+??? -->
