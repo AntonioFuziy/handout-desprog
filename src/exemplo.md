@@ -195,7 +195,7 @@ $$n^2 + 1$$
 
 $${O(n^2)}$$
 
-**Abaixo temos algumas outras sequências de gaps e suas devidas complexidades, apenas como curiosidade:**
+**Abaixo temos algumas outras sequências e suas devidas complexidades, apenas para mostrar que a complexidade varia conforme a sequência de gaps escolhida:**
 
 ---
 
@@ -223,23 +223,31 @@ $${O(n^\frac{3}{2})}$$
 
 - Sequência de gaps escolhida:
 
-$${2^p . 2^q}$$
+$${2^p . 3^q}$$
 
-- Para todo valor de k:
+- Para todo valor de p e q, sendo:
 
-$$k = {1, 2, 3, 4, 5 ...}$$
+$$p = {0, 1, 2, 3, 4, 5 ...}$$
+$$q = {0, 1, 2, 3, 4, 5 ...}$$
 
-- Substituindo os valores de k na sequência de gaps, ficamos com:
+- Substituindo os valores de $p$ e $q$ na sequência de gaps, ficamos com:
 
-$$ 1 + 3 + 7 + 15...+ 2^k - 1$$
+$$ {2^0 . 3^0} + {2^1 . 3^0} + {2^0 . 3^1} + {2^1 . 3^1} + {2^2 . 3^1} + {2^1 . 3^2} + {2^2 . 3^2}...$$
 
 - Por fim a complexidade acaba em:
 
-$${O(n^\frac{3}{2})}$$
+$${O(n.log^2{n})}$$
 
-<!-- 
-??? Curiosidades
-::: .
+
+??? Desafio
+
+Faça um esboço dos três gráficos das complexidades citadas anteriormente de acordo com os tamanhos de vetor e coloque as três em ordem crescente de complexidade.
+
+::: Gabarito
 ![](graphics.png)
+
+Como temos a sequência original de shell sendo quadrática, automaticamente entre as três ela é a maior de todas, ao passo em que a segunda maior é a de Pratt e por fim o menor de todos é a com logaritmo, ao observarmos o gráfico.
+
+$$ O(n.log^2{n}) < O(n^\frac{3}{2}) < O(n^2)$$
 :::
-??? -->
+???
