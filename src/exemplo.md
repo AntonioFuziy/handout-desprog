@@ -80,7 +80,9 @@ Teriamos 3 Subvetores imaginarios, cada um deles com 2 termos:
 Implementação
 ---------
 
-De forma resumida, na primeira iteração é definido um valor de gap e o algoritmo faz essa divisão de subvetores imaginários de acordo com o valor, e os ordena de forma muito semelhante ao insertion sort. Desse modo, na próxima iteração, um novo valor de gap é definido e o processo se repete. Vale ressaltar que os gaps maiores não são garantia que o vetor fique todo ordenado, o único jeito de garantir é diminuir o gap até que o valor seja 1, uma ordenação com gap = 1 nada mais é que o insertion sort tradicional, no entanto ele terá muito menos trabalho pois o vetor já vai estar pelo menos quase ordenado, tendo assim no final, um vetor totalmente ordenado.
+De forma resumida, na primeira iteração é definido um valor de gap e o algoritmo faz essa divisão de subvetores imaginários de acordo com o valor, e os ordena de forma muito semelhante ao insertion sort. 
+
+Desse modo, na próxima iteração, um novo valor de gap é definido e o processo se repete. Vale ressaltar que os gaps maiores não são garantia que o vetor fique todo ordenado, o único jeito de garantir é diminuir o gap até que o valor seja 1, uma ordenação com gap = 1 nada mais é que o insertion sort tradicional, no entanto ele terá muito menos trabalho pois o vetor já vai estar pelo menos quase ordenado, tendo assim no final, um vetor totalmente ordenado.
 
 Mas como são definidos os valores dos **gaps** ?
 
