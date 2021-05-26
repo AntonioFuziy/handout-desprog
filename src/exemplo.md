@@ -10,16 +10,30 @@ Primeira ideia
 
 Antes de tudo, vamos introduzir qual o objetivo e porque é interessante utilizar esse tal de shell sort.
 
-Bom, primeiro então, o shell sort é um algoritmo de ordenação, assim como vimos na [Aula 7](https://ensino.hashi.pro.br/desprog/aula7/index.html) e [Aula 8](https://ensino.hashi.pro.br/desprog/aula8/index.html), e seu funcionamento é semelhante ao do **insertion sort**. Na prática, atualmente o Shell Sort é utilizado em am algumas bibliotecas, como **uClibc** e **bzip2**, a primeira para sistemas embarcados e dispositivos mobile, enquanto a segunda para compressão de pastas, respectivamente.
+Bom, primeiro então, o shell sort é um algoritmo de ordenação, assim como vimos na [Aula 7](https://ensino.hashi.pro.br/desprog/aula7/index.html) e [Aula 8](https://ensino.hashi.pro.br/desprog/aula8/index.html), e seu funcionamento é semelhante ao do **insertion sort**.
 
 Mas por que utilizar o **Shell Sort** e não qualquer um dos outros cinco algoritmos de ordenação?
 
-Bem, o Shell Sort primeiramente tem uma implementação simples e requer pouco código, além disso ele é rapido para arquivos de tamanho moderado. No entanto a característica mais relevante deste algoritmo é que, ao contrário do insertion sort que só move elementos de posição em posição, o shell consegue mover elementos que estão longe um do outro de uma vez só, atrávez de um recurso chamado **gaps**.
+Bem, o Shell Sort primeiramente tem uma implementação simples e requer pouco código, além disso ele é rapido para arquivos de tamanho moderado, além disso, na prática, o shell sort obtem melhores resultados que o insertion sort puro. A prova de que ele é um bom algoritmo, é o fato de que ele é utilizado em am algumas bibliotecas, como **uClibc** e **bzip2**, a primeira para sistemas embarcados e dispositivos mobile, enquanto a segunda para compressão de pastas, respectivamente.
+
+**Mas porque o shell sort obtem melhores resultados que o insertion sort?**
+
+Para entender isso vamos olhar o vetor abaixo
+
+![](enunciadoInsertion.png)
+
+Se fossemos ordenar esse vetor utilizando o insertion sort tradicional, o código teria que levar o 5 até posição final casa por casa, e depois levar o 1 até a posição inicial casa por casa, o que não é nada prático. De modo geral, o insertion sort tem desempenho ruim nos casos em que é necessário mover um número para um casa muito longe.
+
+**Mas e se nós fizessemos um insertion sort somente entre as posições 1, 3 e 5?**
+
+![](gapInsertion.png)
+
+Nesse caso tanto o 5 como o 1, teriam que andar menos casas, o que agilizaria muito a ordenação. Esse conceito é a base do shell sort, que nada mais é que um insertion sort aprimorado, e esse "upgrade" é justamente o conceito de "**gap**". De forma resumida, o shell sort é capaz de mover elementos por distancias maiores de uma vez, o que não é possível no insertion sort, que move elementos de casa em casa.
 
 Gaps
 ---------
 
-O termo "**gap**" significa "Vão", e é exatamente isso que acontece no nosso vetor. De forma resumida, para cada iteração do código, é definido um valor para "**gap**", desse modo, são organizados subvetores imaginários que são os termos do vetor original itercalados por esse valor definido. Talvez fique mais claro com o exemplo abaixo:
+O termo "**gap**" significa "Vão", e é exatamente isso que acontece no nosso vetor. De forma resumida, para cada iteração do código, é definido um valor para "**gap**", desse modo, são organizados subvetores imaginários que são os termos do vetor original intercalados por esse valor definido. Talvez fique mais claro com o exemplo abaixo:
 
 
 ```c
@@ -27,16 +41,6 @@ O termo "**gap**" significa "Vão", e é exatamente isso que acontece no nosso v
 ```
 
 ![](exemplos-gap/exemplo-gap-enunciado.png)
-
-Simulando o vetor acima com Gap = 3 , temos os 3 subvetores imaginários abaixo:
-
-```c
-     {4, 5}
-     {2, 9}
-     {8, 3}
-```
-
-![](exemplos-gap/exemplo-gap3.png)
 
 Simulando o vetor inicial com Gap = 2 , temos os 2 subvetores imaginários abaixo:
 
@@ -76,7 +80,7 @@ Teriamos 3 Subvetores imaginarios, cada um deles com 2 termos:
 Implementação
 ---------
 
-De forma resumida, na primeira iteração é definido um valor de gap e o algoritmo faz essa divisão de subvetores imaginários de acordo com o valor, e os ordena de forma muito semelhante ao insertion sort. Desse modo, na próxima iteração, um novo valor de gap é definido e o processo se repete, até o gap chegar a 1, nesta etapa é feito um insertion sort tradicional, tendo um assim um vetor ordenado como produto final.
+De forma resumida, na primeira iteração é definido um valor de gap e o algoritmo faz essa divisão de subvetores imaginários de acordo com o valor, e os ordena de forma muito semelhante ao insertion sort. Desse modo, na próxima iteração, um novo valor de gap é definido e o processo se repete. Vale ressaltar que os gaps maiores não são garantia que o vetor fique todo ordenado, o único jeito de garantir é diminuir o gap até que o valor seja 1, uma ordenação com gap = 1 nada mais é que o insertion sort tradicional, no entanto ele terá muito menos trabalho pois o vetor já vai estar pelo menos quase ordenado, tendo assim no final, um vetor totalmente ordenado.
 
 Mas como são definidos os valores dos **gaps** ?
 
@@ -181,11 +185,11 @@ $$\frac{n^2}{2} + \frac{n^2}{4} + \frac{n^2}{8} + \frac{n^2}{16}...$$
 
 - Deixando o $n^2$ em evidência, temos que:
 
-$$n^2 + (\frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{16}...)$$
+$$n^2 . (\frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{16}...)$$
 
 - Abrindo-se a sequência em uma PG de razão $\frac{1}{2}$, primeiro termo igual a $\frac{1}{2}$, temos que a soma da PG fica:
 
-$$n^2 + (\frac{\frac{1}{2}}{1 - \frac{1}{2}})$$
+$$n^2 . (\frac{\frac{1}{2}}{1 - \frac{1}{2}})$$
 
 - Resolvendo-se a soma de PG tem-se então que:
 
