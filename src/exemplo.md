@@ -104,13 +104,9 @@ para todo gap maior que 0, divida o gap ao meio
         inserir o elemento guardado anteriormente na posição localizada
 ```
 
-??? Atividade
 
-Pense um pouco sobre como seria o pseudocódigo anterior em C.
+<!-- Pense um pouco sobre como seria o pseudocódigo anterior em C.
 
-Sim, eu sei que pode ser complicado, mas tente pelo menos pensar um pouco como ficaria, e confira depois com o gabarito para validar seu pensamento.
-
-::: Gabarito
 ```c
 void shell_sort(int v[], int n) {
     // para todo gap maior que 0, divida o gap ao meio
@@ -132,11 +128,12 @@ void shell_sort(int v[], int n) {
         }
     }
 }
-```
+``` -->
 
-Vale ressaltar, que utilizamos para esse exemplo utilizamos um tipo de gap, dividimos o gap sempre na metade, mas como citamos anteriormente, existem vários tipos de gaps para ordenações de vetores, sendo uma sequência de gaps mais adequada para cada vetor a ser ordenado.
-:::
-???
+!!! Aviso
+Vale ressaltar, que utilizamos para esse exemplo de pseudocódigo utilizamos um tipo de gap, dividimos o gap sempre na metade, mas como citamos anteriormente, existem vários tipos de gaps para ordenações de vetores, sendo uma sequência de gaps mais adequada para cada vetor a ser ordenado.
+!!!
+
 ??? Exemplo
 
 Abaixo temos um exemplo do shell sort em prática, a sequência de gaps utilizada é de [4,3,2,1]
@@ -152,7 +149,7 @@ Vale lembrar que no exemplo, os subvetores são ordenados de uma vez, no entanto
 
 ??? Atividade
 
-Tendo o vetor abaixo, pense em como ele ficaria antes de ir para o próximo gap, ou seja, no final de cada iteração. **A sequência de gaps utilizadas ainda é a mesma do exemplo anterior.** 
+Tendo o vetor abaixo, pense em como ele ficaria antes de ir para o próximo gap, ou seja, no final de cada iteração. **A sequência de gaps utilizada ainda é a mesma do exemplo anterior.** 
 
 ![](ex-shell.png)
 
@@ -162,11 +159,10 @@ Tendo o vetor abaixo, pense em como ele ficaria antes de ir para o próximo gap,
 ???
 ## Complexidade
 
-Vamos agora dar uma olhada em como funciona a complexidade do shell sort. Bom, basicamente o shell sort não apresenta uma complexidade fixa, uma vez que a sua complexidade varia conforme a sequência escolhida para os **gaps**, se você voltar para o exemplo do algoritmo do shell sort implementado em C, é possível notar que a sequência de gaps é n/2 
+Vamos agora dar uma olhada em como funciona a complexidade do shell sort. Bom, basicamente o shell sort não apresenta uma complexidade fixa, uma vez que a sua complexidade varia conforme a sequência escolhida para os **gaps**, se você voltar para o exemplo do algoritmo do shell sort implementado em C, é possível notar que a sequência de gaps é n/2.
+e a complexidade eh quadratica baseada no tamanho do vetor.
 
-a complexidade eh quadratica baseada no tamanho do vetor
-
-**Sequência original de Shell**
+**Sequência original de Shell (Pior caso)**
 
 - Sequência de gaps escolhida:
 
@@ -201,7 +197,13 @@ $$n^2 + 1$$
 
 $${O(n^2)}$$
 
-**Abaixo temos algumas outras sequências e suas devidas complexidades, apenas para mostrar que a complexidade varia conforme a sequência de gaps escolhida:**
+!!! Aviso
+Na prática, a sequência original de shell mostra o pior caso de complexidade do algoritmo, porém isso não acontece para todos os casos, pois como toda a ordenação por gaps trabalha com vetores "quase ordenados", é importante ressaltar que há estratégias diferentes em que a sequência de gaps escolhida deixa o algoritmo mais performático que o insertion sort na prática.
+!!!
+
+Com o passar dos anos, além da sequência original de shell, algumas outras sequências de gaps mais eficientes que a original foram encontradas, como a sequência de Knuth, Pratt, Hibbard, Sedgewick e outras. Assim, até hoje vários pesquisadores buscam a melhor sequência de gaps para o shell sort.
+
+**Abaixo temos algumas dessas sequências de gaps e suas devidas complexidades, apenas para mostrar que a complexidade varia conforme a sequência escolhida:**
 
 ---
 
