@@ -16,6 +16,22 @@ Mas por que utilizar o **Shell Sort** e não qualquer um dos outros cinco algori
 
 Bem, o Shell Sort primeiramente tem uma implementação simples e requer pouco código, além disso ele é rapido para arquivos de tamanho moderado, além disso, na prática, o shell sort obtem melhores resultados que o insertion sort puro. A prova de que ele é um bom algoritmo, é o fato de que ele é utilizado em am algumas bibliotecas, como **uClibc** e **bzip2**, a primeira para sistemas embarcados e dispositivos mobile, enquanto a segunda para compressão de pastas, respectivamente.
 
+Antes de irmos direto ao shell sort, é interessante revisar o conceito de insertion sort.
+
+Se você não se lembra, a ideia do insertion sort que vimos em aula faz relação a uma situação em que você recebe uma mão de cartas de baralho e toda vez que você pega uma carta na mão, você a insere na posição correta com a finaliade de deixar a sequência de cartas ordenadas.
+
+Dessa forma, temos o exemplo abaixo que deixa mais claro a ideia do insertion sort.
+
+??? Exemplo
+
+Lembre-se que a representação da carta atual na sua mão foi representada por ```c temp``` na animação.
+
+;insertion
+
+??? 
+
+Pronto, agora que lembramos a ideia do insertion sort, vamos dar uma introduzida ao shell sort utilizando a ideia já vista do insertion sort.
+
 **Mas porque o shell sort obtem melhores resultados que o insertion sort?**
 
 Para entender isso vamos olhar o vetor abaixo
@@ -24,9 +40,25 @@ Para entender isso vamos olhar o vetor abaixo
 
 Se fossemos ordenar esse vetor utilizando o insertion sort tradicional, o código teria que levar o 5 até posição final casa por casa, e depois levar o 1 até a posição inicial casa por casa, o que não é nada prático. De modo geral, o insertion sort tem desempenho ruim nos casos em que é necessário mover um número para um casa muito longe.
 
+??? Atividade
+
 **Mas e se nós fizessemos um insertion sort somente entre as posições 1, 3 e 5?**
 
 ![](gapInsertion.png)
+
+
+::: Gabarito
+
+Aplicando o insertion sort, teremos o subvetor ordenado da seguinte forma:
+
+![](atividade1_01.png)
+
+Após a ordenação colocamos o subvetor no seu devido lugar, e então temos o vetor ordenado como queríamos.
+
+![](atividade1_02.png)
+
+:::
+???
 
 Nesse caso tanto o 5 como o 1, teriam que andar menos casas, o que agilizaria muito a ordenação. Esse conceito é a base do shell sort, que nada mais é que um insertion sort aprimorado, e esse "upgrade" é justamente o conceito de "**gap**". De forma resumida, o shell sort é capaz de mover elementos por distancias maiores de uma vez, o que não é possível no insertion sort, que move elementos de casa em casa.
 
@@ -100,35 +132,10 @@ para todo gap maior que 0, divida o gap ao meio
         guardar o valor do termo atual do vetor
         
         localizar a posição que o elemento será inserido
-
+        
         inserir o elemento guardado anteriormente na posição localizada
 ```
-
-
-<!-- Pense um pouco sobre como seria o pseudocódigo anterior em C.
-
-```c
-void shell_sort(int v[], int n) {
-    // para todo gap maior que 0, divida o gap ao meio
-    for (int gap = n/2; gap > 0; gap /= 2) {
-        
-        // para todo gap menor que n, vai para a proxima posicao
-        for (int i = gap; i < n; i += 1) {
-            // guardar o valor do termo atual do vetor
-            int atual = v[i];
- 
-            // localizar a posição que o elemento será inserido
-            int j;           
-            for (j = i; j >= gap && v[j - gap] > atual; j -= gap){
-                v[j] = v[j - gap];
-            }
-             
-            // inserir o elemento guardado anteriormente na posição localizada
-            v[j] = atual;
-        }
-    }
-}
-``` -->
+Entrando mais a fundo, a primeira linha do pseudocódigo retrata po loop mais externo o qual representa a extração do subvetor a partir do vetor recebido, ao passo em que o loop mais interno retrada o **insertion sort**, ordenando o subvetor extraído do loop externo.
 
 !!! Aviso
 Vale ressaltar, que utilizamos para esse exemplo de pseudocódigo utilizamos um tipo de gap, dividimos o gap sempre na metade, mas como citamos anteriormente, existem vários tipos de gaps para ordenações de vetores, sendo uma sequência de gaps mais adequada para cada vetor a ser ordenado.
@@ -151,10 +158,46 @@ Vale lembrar que no exemplo, os subvetores são ordenados de uma vez, no entanto
 
 Tendo o vetor abaixo, pense em como ele ficaria antes de ir para o próximo gap, ou seja, no final de cada iteração. **A sequência de gaps utilizada ainda é a mesma do exemplo anterior.** 
 
+Vamos fazer primeiro para o **gap 4**.
+
 ![](ex-shell.png)
 
 ::: Gabarito
-![](gabarito-ex-shell.png)
+gap -> 4
+
+![](atividade2_2.png)
+:::
+???
+
+??? Atividade
+Vamos agora fazer para o **gap 3** e assim por diante.
+
+::: Gabarito
+gap -> 3
+
+![](atividade2_3.png)
+:::
+???
+
+??? Atividade
+**gap 2**
+
+::: Gabarito
+gap -> 2
+
+![](atividade2_4.png)
+:::
+???
+
+??? Atividade
+**gap 1**
+
+**Dica: Essa última iteração é igual ao insertion sort**
+
+::: Gabarito
+gap -> 1
+
+![](atividade2_5.png)
 :::
 ???
 ## Complexidade
