@@ -5,7 +5,7 @@ Shell Sort
 
 ---
 
-Primeira ideia
+Uma visão sobre aplicações do Shell Sort
 ---------
 
 Antes de tudo, vamos introduzir qual o objetivo e porque é interessante utilizar esse tal de shell sort.
@@ -15,6 +15,9 @@ Bom, primeiro então, o shell sort é um algoritmo de ordenação, assim como vi
 Mas por que utilizar o **Shell Sort** e não qualquer um dos outros cinco algoritmos de ordenação?
 
 Bem, o Shell Sort primeiramente tem uma implementação simples e requer pouco código, além disso ele é rapido para arquivos de tamanho moderado, além disso, na prática, o shell sort obtem melhores resultados que o insertion sort puro. A prova de que ele é um bom algoritmo, é o fato de que ele é utilizado em am algumas bibliotecas, como **uClibc** e **bzip2**, a primeira para sistemas embarcados e dispositivos mobile, enquanto a segunda para compressão de pastas, respectivamente.
+
+Relembrando Insertion Sort
+---------
 
 Antes de irmos direto ao shell sort, é interessante revisar o conceito de insertion sort.
 
@@ -26,9 +29,26 @@ Dessa forma, temos o exemplo abaixo que deixa mais claro a ideia do insertion so
 
 Lembre-se que a representação da carta atual na sua mão foi representada por ```c temp``` na animação.
 
+Para o primeiro exemplo, o vetor que você recebe é este:
+
+![](insertion_example.png)
+
+Vamos, te ajudar com o começo, para a primeira iteração, a carta que você pega primeiro é a que está no índice 1 do vetor (lembrando que o primeiro índice é 0) ```c temp = 0```, dessa forma você olha para a carta da posição anterior e ordena as duas de forma crescente (essa foi a forma que utilizamos em aula, mas não seria trivial colocar em ordem decrescente).
+
+;first_insertion
+
+Após a primeira iteração, pega-se a próxima carta (terceira, índice 2) e olha-se para as duas cartas das posições anteriores (índice 0 e 1) e ordena-se do mesmo jeito que na iteração anterior.
+
+;second_insertion
+
+Agora sim, lembramos como funciona o insertion sort, para finalizar, olhe o exemplo da ordenação do vetor inteiro:
+
 ;insertion
 
 ??? 
+
+Primeira Ideia
+---------
 
 Pronto, agora que lembramos a ideia do insertion sort, vamos dar uma introduzida ao shell sort utilizando a ideia já vista do insertion sort.
 
@@ -192,7 +212,7 @@ gap -> 2
 ??? Atividade
 **gap 1**
 
-**Dica: Essa última iteração é igual ao insertion sort**
+**Dica: Nessa última iteração a ordenação é igual a do insertion sort**
 
 ::: Gabarito
 gap -> 1
@@ -202,7 +222,7 @@ gap -> 1
 ???
 ## Complexidade
 
-Vamos agora dar uma olhada em como funciona a complexidade do shell sort. Bom, basicamente o shell sort não apresenta uma complexidade fixa, uma vez que a sua complexidade varia conforme a sequência escolhida para os **gaps**, se você voltar para o exemplo do algoritmo do shell sort implementado em C, é possível notar que a sequência de gaps é n/2.
+Vamos agora dar uma olhada em como funciona a complexidade do shell sort. Bom, basicamente o shell sort não apresenta uma complexidade fixa, uma vez que a sua complexidade varia conforme a sequência escolhida para os **gaps**, se você voltar para o exemplo do algoritmo do shell sort implementado em C, é possível notar que a sequência de gaps é $\frac{n}{2}$.
 e a complexidade eh quadratica baseada no tamanho do vetor.
 
 **Sequência original de Shell (Pior caso)**
@@ -215,9 +235,15 @@ $$\frac{n}{2^k}$$
 
 $$k = {1, 2, 3, 4, 5 ...}$$
 
-- Substituindo os valores de k na sequência de gaps, ficamos com:
+??? Atividade
 
+Substituindo os valores de k na sequência de gaps como ficará a sequência resultante?
+
+
+::: Gabarito
 $$\frac{n}{2} + \frac{n}{4} + \frac{n}{8} + \frac{n}{16}...$$
+:::
+???
 
 - Mas, lembre-se, como todo subvetor imaginário do shell sort é ordenado pelo **insertion sort**, e a complexidade de todo o insertion sort é quadrática (
 $O(n^2)$), o que ocorre é que a sequência de gaps somada, dependerá dessa ordenação. Assim, a soma de todos os gaps fica:
@@ -227,6 +253,14 @@ $$\frac{n^2}{2} + \frac{n^2}{4} + \frac{n^2}{8} + \frac{n^2}{16}...$$
 - Deixando o $n^2$ em evidência, temos que:
 
 $$n^2 . (\frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{16}...)$$
+
+??? Atividade
+
+Olhando para a sequência que temos até agora já conseguimos visualizar qual será o resultado da complexidade do shell sort, veja se você consegue perceber logo de cara.
+
+**Dica, olhe para o $n^2$**
+
+::: Gabarito
 
 - Abrindo-se a sequência em uma PG de razão $\frac{1}{2}$, primeiro termo igual a $\frac{1}{2}$, temos que a soma da PG fica:
 
@@ -239,6 +273,9 @@ $$n^2 + 1$$
 - Por fim, como temos a sequência dependente apenas de $n^2$, podemos concluir que a complexidade da sequência original de Shell Sort é:
 
 $${O(n^2)}$$
+
+:::
+???
 
 !!! Aviso
 Na prática, a sequência original de shell mostra o pior caso de complexidade do algoritmo, porém isso não acontece para todos os casos, pois como toda a ordenação por gaps trabalha com vetores "quase ordenados", é importante ressaltar que há estratégias diferentes em que a sequência de gaps escolhida deixa o algoritmo mais performático que o insertion sort na prática.
@@ -289,7 +326,6 @@ $$ {2^0 . 3^0} + {2^1 . 3^0} + {2^0 . 3^1} + {2^1 . 3^1} + {2^2 . 3^1} + {2^1 . 
 
 $${O(n.log^2{n})}$$
 
-
 ??? Desafio
 
 Faça um esboço dos três gráficos das complexidades citadas anteriormente de acordo com os tamanhos de vetor e coloque as três em ordem crescente de complexidade.
@@ -300,5 +336,16 @@ Faça um esboço dos três gráficos das complexidades citadas anteriormente de 
 Como temos a sequência original de shell sendo quadrática, automaticamente entre as três ela é a maior de todas, ao passo em que a segunda maior é a de Pratt e por fim o menor de todos é a com logaritmo, ao observarmos o gráfico.
 
 $$ O(n.log^2{n}) < O(n^\frac{3}{2}) < O(n^2)$$
+:::
+???
+
+??? Dedução final
+
+Para finalizar, queremos apenas confirmar se você entendeu a ideia do porquê utilizar um shell sort em alguns casos e não o insertion sort. Mas afinal, porque você acha que seria mais viável utilizar o shell sort ao invés do insertion?
+
+::: Gabarito
+
+A ideia geral é que o shell sort seja utilizado para vetores mais desordenados, utilizando os gaps para ordenar os elementos que estão mais distantes um do outro, dessa forma, **é mais prático trabalhar com gaps pequenos quando o vetor está quase ordenado**, de forma que quando o gap da ordenação é 1, utilizar o shell sort é a mesma coisa de utilizar o insertion sort puro para ordenar o vetor.
+
 :::
 ???
