@@ -222,8 +222,7 @@ gap -> 1
 ???
 ## Complexidade
 
-Vamos agora dar uma olhada em como funciona a complexidade do shell sort. Bom, basicamente o shell sort não apresenta uma complexidade fixa, uma vez que a sua complexidade varia conforme a sequência escolhida para os **gaps**, se você voltar para o exemplo do algoritmo do shell sort implementado em C, é possível notar que a sequência de gaps é $\frac{n}{2}$.
-e a complexidade eh quadratica baseada no tamanho do vetor.
+Vamos agora dar uma olhada em como funciona a complexidade do shell sort. Bom, basicamente o shell sort não apresenta uma complexidade fixa, uma vez que a sua complexidade varia conforme a sequência escolhida para os **gaps**.
 
 **Sequência original de Shell (Pior caso)**
 
