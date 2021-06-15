@@ -326,6 +326,17 @@ $$ {2^0 . 3^0} + {2^1 . 3^0} + {2^0 . 3^1} + {2^1 . 3^1} + {2^2 . 3^1} + {2^1 . 
 
 $${O(n.log^2{n})}$$
 
+??? Dedução final
+
+Para finalizar, queremos apenas confirmar se você entendeu a ideia do porquê utilizar um shell sort em alguns casos e não o insertion sort. Mas afinal, porque você acha que seria mais viável utilizar o shell sort ao invés do insertion?
+
+::: Gabarito
+
+A ideia geral é que o shell sort seja utilizado para vetores mais desordenados, utilizando os gaps para ordenar os elementos que estão mais distantes um do outro, dessa forma, **é mais prático trabalhar com gaps pequenos quando o vetor está quase ordenado**, de forma que quando o gap da ordenação é 1, utilizar o shell sort é a mesma coisa de utilizar o insertion sort puro para ordenar o vetor.
+
+:::
+???
+
 ??? Desafio
 
 Faça um esboço dos três gráficos das complexidades citadas anteriormente de acordo com os tamanhos de vetor e coloque as três em ordem crescente de complexidade.
@@ -336,16 +347,5 @@ Faça um esboço dos três gráficos das complexidades citadas anteriormente de 
 Como temos a sequência original de shell sendo quadrática, automaticamente entre as três ela é a maior de todas, ao passo em que a segunda maior é a de Pratt e por fim o menor de todos é a com logaritmo, ao observarmos o gráfico.
 
 $$ O(n.log^2{n}) < O(n^\frac{3}{2}) < O(n^2)$$
-:::
-???
-
-??? Dedução final
-
-Para finalizar, queremos apenas confirmar se você entendeu a ideia do porquê utilizar um shell sort em alguns casos e não o insertion sort. Mas afinal, porque você acha que seria mais viável utilizar o shell sort ao invés do insertion?
-
-::: Gabarito
-
-A ideia geral é que o shell sort seja utilizado para vetores mais desordenados, utilizando os gaps para ordenar os elementos que estão mais distantes um do outro, dessa forma, **é mais prático trabalhar com gaps pequenos quando o vetor está quase ordenado**, de forma que quando o gap da ordenação é 1, utilizar o shell sort é a mesma coisa de utilizar o insertion sort puro para ordenar o vetor.
-
 :::
 ???
